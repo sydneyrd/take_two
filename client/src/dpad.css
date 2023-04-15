@@ -1,0 +1,57 @@
+.d-pad {
+    position: relative;
+    width: 12em;
+    height: 12em;
+  }
+  
+  .d-pad-button {
+    position: absolute;
+    background-color: rgb(247, 218, 39);
+    border-radius: 2px;
+  }
+  
+  .d-pad-center {
+    position: absolute;
+    background-color: rgb(247, 218, 39);
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    left: 50%;
+    margin-top: -30px;
+    margin-left: -30px;
+    
+  }
+  
+  .d-pad-button.up,
+  .d-pad-button.down {
+    width: 60px;
+    height: 20px;
+    left: 50%;
+    margin-left: -30px;
+  }
+  
+  .d-pad-button.left,
+  .d-pad-button.right {
+    width: 20px;
+    height: 60px;
+    top: 50%;
+    margin-top: -30px;
+  }
+  
+  .d-pad-button.up {
+    top: 50px; /* Move even closer to the center */
+  }
+  
+  .d-pad-button.right {
+    right: 50px; /* Move even closer to the center */
+  }
+  
+  .d-pad-button.down {
+    bottom: 50px; /* Move even closer to the center */
+  }
+  
+  .d-pad-button.left {
+    left: 50px; /* Move even closer to the center */
+  }
+
+  
