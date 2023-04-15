@@ -1,6 +1,6 @@
 
 export const getResponse = async (input) => {
-    const response = await fetch("http://localhost:3001/api/openai", {
+    const response = await fetch("/api/openai", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -14,7 +14,7 @@ export const getResponse = async (input) => {
 
 export const voiceTranslate = async (input) => {
     try {
-        const response = await fetch('http://localhost:3001/api/uberduck', {
+        const response = await fetch('/api/uberduck', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
