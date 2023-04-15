@@ -14,7 +14,7 @@
     background-color: #09f62f;
     border: 3px solid black;
     border-radius: 50%;
-    color: white;
+    color: black;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -124,7 +124,7 @@
     border: solid black 3px;
     border-radius: 50%;
     background-color: indigo;
-    color: white;
+    color: black;
     padding: 1em;
     box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
     transition: box-shadow .15s,transform .15s;
