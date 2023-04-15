@@ -33,7 +33,13 @@ export const VoiceToText = ({setTranscript,  listening, setListening, recognitio
     }
   };
 
-
+  const handleVoiceButtonClick = () => {
+    if (listening) {
+      stopListening(() => {});
+    } else {
+      startListening();
+    }
+  };
 
 
   return (
@@ -53,11 +59,10 @@ export const VoiceToText = ({setTranscript,  listening, setListening, recognitio
 
  <button className="voice--button"
       
-      onClick={listening ? stopListening : startListening}>
+      onClick={handleVoiceButtonClick}>
         {listening ? '🛑' : '🎤'}
       </button>
 </div>
-
       </>
   );
 };

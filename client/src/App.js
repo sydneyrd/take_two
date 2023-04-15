@@ -5,7 +5,7 @@ import { LoadingEllipsis } from './LoadingEllipses';
 import { getResponse, voiceTranslate } from './manager';
 import {personality} from './personality/bmo';
 import {VoiceToText} from './VoiceToText'
-
+import {getRandomFace} from './personality/faces'
 
 
 function App() {
@@ -23,22 +23,7 @@ function App() {
               const strWithoutBracket = str.replace(regex, '').trim();
               return [strWithoutBracket, regex.exec(str)?.[1] ?? ''];
             }
-            
 
-  // const stopListening = async () => {
-  //   if (recognition) {
-  //    setListening(false);
-  //    await recognition.stop();
-  //   }
-  // };
-
-  // const stopListening = async (callback) => {
-  //   if (recognition) {
-  //     setListening(false);
-  //     await recognition.stop();
-  //     callback && callback();
-  //   }
-  // };
   const stopListening = (callback) => {
     if (recognition) {
       setListening(false);
@@ -53,7 +38,12 @@ function App() {
       recognition.stop();
     }
   };
-  
+  const didBmoRememberFace = (bracketContent) =>{
+    if (bracketContent !== ''){
+    setShowFace(bracketContent);
+  } else setShowFace(getRandomFace().face)
+
+  }
   
   
   
@@ -65,9 +55,9 @@ function App() {
           const chatresponse = await getResponse(messages);
           const [stringWithoutEmoticon, emoticon] = removeBracketContent(chatresponse.message.content);
           console.log(emoticon)
-          setShowFace(emoticon)
+          // setShowFace(emoticon)
+          didBmoRememberFace(emoticon)
           const res = await voiceTranslate(stringWithoutEmoticon);
-          console.log(res)
           setMessages((prevMessages) => [...prevMessages, chatresponse.message]);
           setIsLoading(false);
         }
@@ -78,33 +68,7 @@ function App() {
   
  //on first render, have a pop up that gives instructions/link? 
  
-    // const handleClick = async (e) => {
-    //   e.preventDefault();
-    //   if (listening) {
-    //     await stopListening();
-    //     //somewhere here i need to wait for the transcript to update before moving on to the other logic
-    //   }
-    //   let copy = { role: "user", content: "" };
-    //   if (input !== "") {
-    //     copy = { role: "user", content: input };
-    //   }
-    //   if (transcript !== "") {
-    //     copy = { role: "user", content: transcript };
-    //   }
-    //   setMessages((prevMessages) => [...prevMessages, copy]);
-    //   setInput("");
-    //   setTranscript("");
-    // };
-    // const handleClick = async (e) => {
-    //   e.preventDefault();
-    //   if (listening) {
-    //     await stopListening(() => {
-    //       sendUserMessage();
-    //     });
-    //   } else {
-    //     sendUserMessage();
-    //   }
-    // };
+    
     const handleClick = (e) => {
       e.preventDefault();
       if (listening) {
@@ -115,24 +79,6 @@ function App() {
         sendUserMessage();
       }
     };
-    
-    
-    // const sendUserMessage = () => {
-    //   let copy = { role: "user", content: "" };
-    //   if (input !== "") {
-    //     copy = { role: "user", content: input };
-    //   }
-    //   if (transcript !== "") {
-    //     copy = { role: "user", content: transcript };
-    //   }
-    //   if (copy.content){ setMessages((prevMessages) => [...prevMessages, copy]);
-    //   setInput("");
-    //   setTranscript("");}
-    //   else{}
-     
-      
-    // };
-
     const sendUserMessage = (finalTranscript = "") => {
       let copy = { role: "user", content: "" };
       if (input !== "") {
@@ -154,7 +100,7 @@ function App() {
 return (
   <div className="App">
 
-    <div className="face">
+    <div className="face" id='screen'>
       
     {isLoading ? <LoadingEllipsis /> :      <div className="expression">
                 {showFace}

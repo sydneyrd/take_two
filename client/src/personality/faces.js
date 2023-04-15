@@ -1,4 +1,11 @@
-export const FACES = [
+
+export function getRandomFace() {
+    const randomIndex = Math.floor(Math.random() * FACES.length);
+    return FACES[randomIndex];
+  }
+
+
+const FACES = [
     {
         face: '(❁´◡`❁)',
     },
@@ -52,7 +59,7 @@ export const FACES = [
     },
     {
         face: ' ´◡` '
-    }
+    },
         {
             face: '(╥﹏╥)',
         },

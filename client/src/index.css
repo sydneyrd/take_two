@@ -1,13 +1,12 @@
-App {
+.App {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     
   }
-  
+  .input{
+    font-family: 'Press Strt 2P', cursive;
+  }
   .root{
     background-color:#62c4ad;
     height:100%;

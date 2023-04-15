@@ -14,7 +14,6 @@
     background-color: #09f62f;
     border: 3px solid black;
     border-radius: 50%;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     color: white;
     cursor: pointer;
     display: flex;
@@ -24,7 +23,24 @@
     height: 60px;
     width: 60px;
     margin-top:6em;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    transition: box-shadow .15s,transform .15s;
+    font-size:large;
+    touch-action: manipulation;  
     
+  }
+
+  .voice--button:active {
+    box-shadow: 0px 0px 0px 0px;
+    top: 5px;
+    left: 5px;
+  }
+  
+  @media (min-width: 768px) {
+    .voice--button{
+      box-shadow: 0.15em 0.15em 0.15em  rgb(8, 27, 26);
+      
+    }
   }
   .voice--send{
   /* //triangle button */
@@ -65,7 +81,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px inset, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px inset;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 1px 1px inset, rgba(0, 0, 0, 0.2) 0 0 10px 5px inset;
+    border-radius: 20px;
   }
   
   .expression{
@@ -87,32 +104,43 @@
   .input--and--button input {
     flex: 1; /* add this to make the input element take up all available space */
   
-  
+    font-family: 'Press Start 2P', cursive;
   padding: 6px 12px;
   background: rgb(31, 32, 35);
-  border: 1px solid rgb(60, 63, 68);
+  border: 1px solid rgb(22, 24, 27);
   border-radius: 4px;
   font-size: 13px;
   color: rgb(247, 248, 248);
   height: 46px;
   appearance: none;
-  transition: border 0.15s ease 0s;}
-  :focus{
-      outline: none;
-      box-shadow: none;
-      border-color: rgb(100, 153, 255);
-  }
-  
+  transition: border 0.15s ease 0s;
+}
   .input--and--button button {
     margin-left: 1em; /* add some margin to the left of the button */
   }
+
+  
   .send--text {
-    border: solid black 2px;
+    border: solid black 3px;
     border-radius: 50%;
     background-color: indigo;
     color: white;
     padding: 1em;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    transition: box-shadow .15s,transform .15s;
     font-size:large;
+    touch-action: manipulation;  
   }
   
+  .send--text:active {
+    box-shadow: 0px 0px 0px 0px;
+    top: 5px;
+    left: 5px;
+  }
+  
+  @media (min-width: 768px) {
+    .send--text{
+      box-shadow: 0.15em 0.15em 0.15em  rgb(8, 27, 26);
+      
+    }
+  }
