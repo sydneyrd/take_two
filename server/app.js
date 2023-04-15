@@ -21,7 +21,8 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 // Serve static files from the React build directory
-app.use(express.static(path.join(__dirname, '../build')));
+app.use(express.static(path.join(__dirname, '../client/build')));
+
 
 
 app.post('/api/openai', async (req, res) => {
@@ -75,8 +76,11 @@ app.post('/api/uberduck', async (req, res) => {
 
 // Serve the React app's index.html for all other requests
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+
 });
+
+
 
 app.listen(port, () => {
     console.log(`Backend server is listening at http://localhost:${port}`);
