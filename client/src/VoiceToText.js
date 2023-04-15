@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './dpad.css'
 
-export const VoiceToText = ({setTranscript, listening, setListening, recognition, setRecognition, stopListening}) => {
+export const VoiceToText = ({setTranscript,  listening, setListening, recognition, setRecognition, stopListening}) => {
 
   useEffect(() => {
     if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
@@ -17,24 +17,8 @@ export const VoiceToText = ({setTranscript, listening, setListening, recognition
     }
   }, []);
 
-//   const startListening = () => {
-//     setTranscript('')
-//     if (recognition) {
-//       setListening(true);
-//       recognition.start();
-//       recognition.onresult = (event) => {
-//         const currentResult = event.results[event.results.length - 1];
-//         if (currentResult.isFinal) {
-//           const newTranscript = currentResult[0].transcript;
-//           setTranscript((prevTranscript) => prevTranscript + " " + newTranscript.trim());
-//         }
-//       };
-      
-//     }
-//   };
-
-const startListening = () => {
-    setTranscript("");
+  const startListening = () => {
+    setTranscript('')
     if (recognition) {
       setListening(true);
       recognition.start();
@@ -45,10 +29,11 @@ const startListening = () => {
           setTranscript((prevTranscript) => prevTranscript + " " + newTranscript.trim());
         }
       };
+      
     }
   };
-  
-  
+
+
 
 
   return (

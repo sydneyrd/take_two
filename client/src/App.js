@@ -25,24 +25,36 @@ function App() {
             }
             
 
-//   const stopListening = async () => {
-//     if (recognition) {
-//      await setListening(false);
-//       recognition.stop();
-//     }
-//   };
+  // const stopListening = async () => {
+  //   if (recognition) {
+  //    setListening(false);
+  //    await recognition.stop();
+  //   }
+  // };
 
-const stopListening = async (callback) => {
+  // const stopListening = async (callback) => {
+  //   if (recognition) {
+  //     setListening(false);
+  //     await recognition.stop();
+  //     callback && callback();
+  //   }
+  // };
+  const stopListening = (callback) => {
     if (recognition) {
-      recognition.onend = () => {
-        if (callback) {
-          callback();
+      setListening(false);
+      recognition.onresult = (event) => {
+        const currentResult = event.results[event.results.length - 1];
+        if (currentResult.isFinal) {
+          const newTranscript = currentResult[0].transcript;
+          setTranscript((prevTranscript) => prevTranscript + " " + newTranscript.trim());
+          callback(newTranscript.trim());
         }
       };
-      await setListening(false);
       recognition.stop();
     }
   };
+  
+  
   
   
     useEffect(() => {
@@ -70,6 +82,7 @@ const stopListening = async (callback) => {
     //   e.preventDefault();
     //   if (listening) {
     //     await stopListening();
+    //     //somewhere here i need to wait for the transcript to update before moving on to the other logic
     //   }
     //   let copy = { role: "user", content: "" };
     //   if (input !== "") {
@@ -82,31 +95,60 @@ const stopListening = async (callback) => {
     //   setInput("");
     //   setTranscript("");
     // };
-    const handleClick = async (e) => {
-        e.preventDefault();
+    // const handleClick = async (e) => {
+    //   e.preventDefault();
+    //   if (listening) {
+    //     await stopListening(() => {
+    //       sendUserMessage();
+    //     });
+    //   } else {
+    //     sendUserMessage();
+    //   }
+    // };
+    const handleClick = (e) => {
+      e.preventDefault();
+      if (listening) {
+        stopListening((finalTranscript) => {
+          sendUserMessage(finalTranscript);
+        });
+      } else {
+        sendUserMessage();
+      }
+    };
+    
+    
+    // const sendUserMessage = () => {
+    //   let copy = { role: "user", content: "" };
+    //   if (input !== "") {
+    //     copy = { role: "user", content: input };
+    //   }
+    //   if (transcript !== "") {
+    //     copy = { role: "user", content: transcript };
+    //   }
+    //   if (copy.content){ setMessages((prevMessages) => [...prevMessages, copy]);
+    //   setInput("");
+    //   setTranscript("");}
+    //   else{}
+     
       
-        const sendMessage = () => {
-          let copy = { role: "user", content: "" };
-          if (input !== "") {
-            copy = { role: "user", content: input };
-          } else if (transcript !== "") {
-            copy = { role: "user", content: transcript };
-          }
-          setMessages((prevMessages) => [...prevMessages, copy]);
-          setInput("");
-          setTranscript("");
-        };
-      
-        if (listening) {
-          await stopListening();
-          setTimeout(() => {
-            sendMessage();
-          }, 1000); // Wait for 1 second
-        } else {
-          sendMessage();
-        }
-      };
-      
+    // };
+
+    const sendUserMessage = (finalTranscript = "") => {
+      let copy = { role: "user", content: "" };
+      if (input !== "") {
+        copy = { role: "user", content: input };
+      }
+      if (transcript !== "" || finalTranscript !== "") {
+        copy = { role: "user", content: finalTranscript || transcript };
+      }
+      if (copy.content) {
+        setMessages((prevMessages) => [...prevMessages, copy]);
+        setInput("");
+        setTranscript("");
+      }
+    };
+    
+    
       
 
 return (
@@ -124,7 +166,7 @@ return (
       <button className='send--text' onClick={(click) => handleClick(click)}>▶</button>
     </div>
     <div className="buttons--container">
-    <VoiceToText stopListening={stopListening} recognition={recognition} setRecognition={setRecognition} setTranscript={setTranscript}  listening={listening} setListening={setListening}/>
+    <VoiceToText  stopListening={stopListening} recognition={recognition} setRecognition={setRecognition} setTranscript={setTranscript}  listening={listening} setListening={setListening}/>
   </div></div>
 );
       }

@@ -1,5 +1,5 @@
-export const FACES = {
-    'happy': [{
+export const FACES = [
+    {
         face: '(❁´◡`❁)',
     },
     {
@@ -49,13 +49,10 @@ export const FACES = {
     },
     {
         face: ' ◕‿◕ '
-       
     },
     {
         face: ' ´◡` '
     }
-    ],
-    'sad': [
         {
             face: '(╥﹏╥)',
         },
@@ -87,8 +84,6 @@ export const FACES = {
             face: 'o(TヘTo)',
         },
 
-    ],
-    'angry': [
         {
             face: '(╬ ಠ益ಠ)',
         },
@@ -116,8 +111,6 @@ export const FACES = {
         {
             face: '╚(•⌂•)╝',
         },
-    ],
-    'what' : [
         {
             face: '(⊙_◎)',
         },
@@ -164,4 +157,3 @@ export const FACES = {
             face: '（*´д｀*）',
         }
     ]
-}

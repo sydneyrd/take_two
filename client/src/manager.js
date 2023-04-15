@@ -34,4 +34,3 @@ export const voiceTranslate = async (input) => {
     }
 };
 
-  
